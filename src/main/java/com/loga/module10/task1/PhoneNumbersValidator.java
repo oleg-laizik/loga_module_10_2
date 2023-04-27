@@ -11,11 +11,13 @@ import static com.loga.module10.utils.FileUtils.loadFile;
 
 public class PhoneNumbersValidator {
 
+
     private static final String PHONE_REGEX = "\\(\\d{3}\\) \\d{3}-\\d{4}|\\d{3}-\\d{3}-\\d{4}";
 
     public static void main(String[] args) {
         String fileName = "task1/file.txt";
         File file = loadFile(fileName);
+
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;

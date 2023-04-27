@@ -22,9 +22,9 @@ public class WordFrequencyCounter {
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String word = scanner.next();
-            word = word.replaceAll("[^a-z]", ""); // видаляємо всі символи, окрім літер
-            if (word.isEmpty()) continue; // пропускаємо порожні слова
-            wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1); // додаємо слово до мапи
+            word = word.replaceAll("[^a-z]", "");
+            if (word.isEmpty()) continue;
+            wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1);
         }
         scanner.close();
         return wordFreq;
@@ -34,7 +34,7 @@ public class WordFrequencyCounter {
 
     public static void printWordFrequencies(Map<String, Integer> wordFreq) {
         wordFreq.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed()) // сортуємо по значенню в зворотньому порядку
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .forEach(entry -> System.out.println(entry.getKey() + " " + entry.getValue()));
     }
 }
