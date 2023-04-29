@@ -7,7 +7,12 @@ public class FileUtils {
     }
 
     public static File loadFile(String filename) {
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        return new File(classloader.getResource(filename).getFile());
+        try {
+            return new File(
+                    Thread.currentThread().getContextClassLoader().getResource(filename).toURI());
+        } catch (Exception e) {
+            System.out.println("Can't load file: " + filename);
+            throw new RuntimeException();
+        }
     }
 }

@@ -1,14 +1,18 @@
 package com.loga.module10.task2;
 
+import com.loga.module10.utils.FileUtils;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class User {
+
     private String name;
     private int age;
 
@@ -23,17 +27,18 @@ public class User {
 
     public int getAge() {
         return age;
-
     }
 
 }
+
 class Main {
+
     public static void main(String[] args) {
         List<User> users = new ArrayList<>();
         String line;
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/task2/file.txt"))) {
+        try (BufferedReader br = new BufferedReader(
+                new FileReader(FileUtils.loadFile("task2/file.txt")))) {
             br.readLine();
-
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(" ");
                 String name = fields[0];
@@ -47,9 +52,9 @@ class Main {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(users);
-
-        try (FileWriter writer = new FileWriter("src/main/resources/task2/user.json")) {
+        try (FileWriter writer = new FileWriter("./user.json")) {
             writer.write(json);
+            System.out.println("File saved");
         } catch (Exception e) {
             System.out.println("Error writing file: " + e.getMessage());
         }
